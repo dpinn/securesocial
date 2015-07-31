@@ -27,9 +27,9 @@ resolvers ++= Seq(
   Resolver.typesafeRepo("releases")
 )
 
-organization := "ws.securesocial"
+organization := "io.appspokes"
 
-organizationName := "SecureSocial"
+organizationName := "AppSpokes"
 
 organizationHomepage := Some(new URL("http://www.securesocial.ws"))
 
@@ -40,12 +40,14 @@ publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
 
 publishTo := {
-  val nexus = "https://oss.sonatype.org/"
+  val nexus = "http://nexus.appfusions.com/"
   if (version.value.trim.endsWith("SNAPSHOT"))
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    Some("releases"  at nexus + "content/repositories/releases")
 }
+
+credentials += Credentials(Path.userHome / ".ivy2" / "credentials.nexus.appfusions")
 
 startYear := Some(2012)
 
